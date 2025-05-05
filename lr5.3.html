@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сума введених чисел</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 10px; font-size: 16px; margin-top: 10px; margin-right: 5px; }
+    #result { margin-top: 20px; font-size: 18px; }
+    #numberList { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .numberBlock {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Сума введених чисел</h2>
+<input type="number" id="numberInput" placeholder="Введіть число">
+<button onclick="addNumber()">Додати</button>
+<button onclick="finishInput()">Завершити</button>
+
+<div id="numberList"></div>
+<div id="result"></div>
+
+<script>
+  const numbers = [];
+
+  function addNumber() {
+    const input = document.getElementById("numberInput");
+    const value = parseFloat(input.value);
+
+    if (!isNaN(value)) {
+      numbers.push(value);
+      updateNumberList();
+    }
+
+    input.value = "";
+    input.focus();
+  }
+
+  function updateNumberList() {
+    const list = document.getElementById("numberList");
+    list.innerHTML = "";
+
+    numbers.forEach(num => {
+      const block = document.createElement("div");
+      block.className = "numberBlock";
+      block.textContent = num;
+      list.appendChild(block);
+    });
+  }
+
+  function finishInput() {
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    document.getElementById("result").innerHTML =
+      `<strong>Сума введених чисел:</strong> ${sum}`;
+  }
+</script>
+
+</body>
+</html>

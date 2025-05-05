@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Операції з масивом styles</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    pre { background: #f0f0f0; padding: 10px; }
+    button { padding: 10px 20px; font-size: 16px; }
+    #arrayVisualization { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .arrayItem {
+      padding: 15px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Операції з масивом styles</h2>
+<button onclick="runOperations()">Виконати</button>
+
+<h3>Результати:</h3>
+<pre id="output"></pre>
+
+<div id="arrayVisualization"></div>
+
+<script>
+  function runOperations() {
+    const output = document.getElementById('output');
+    const arrayVisualization = document.getElementById('arrayVisualization');
+    let log = "";
+
+    // 1. Створення масиву
+    let styles = ["Jazz", "Blues"];
+    log += "1. " + JSON.stringify(styles) + "\n";
+    updateVisualization(styles);
+
+    // 2. Додаємо "Rock-n-Roll"
+    styles.push("Rock-n-Roll");
+    log += "2. " + JSON.stringify(styles) + "\n";
+    updateVisualization(styles);
+
+    // 3. Замінюємо середній елемент на "Classics"
+    let middleIndex = Math.floor(styles.length / 2);
+    styles[middleIndex] = "Classics";
+    log += "3. " + JSON.stringify(styles) + "\n";
+    updateVisualization(styles);
+
+    // 4. Видаляємо перший елемент і показуємо його
+    let first = styles.shift();
+    log += "4. " + JSON.stringify(styles) + "\n";
+    updateVisualization(styles);
+
+    // 5. Вставляємо Rap та Reggae на початок
+    styles.unshift("Rap", "Reggae");
+    log += "5. " + JSON.stringify(styles) + "\n";
+    updateVisualization(styles);
+
+    output.textContent = log;
+
+    function updateVisualization(array) {
+      arrayVisualization.innerHTML = ''; // Очищаємо попереднє відображення
+      array.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'arrayItem';
+        div.textContent = item;
+        arrayVisualization.appendChild(div);
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
